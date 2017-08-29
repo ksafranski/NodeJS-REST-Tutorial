@@ -1,0 +1,26 @@
+{
+  "/users": {
+    "post": {
+      "controller": "users",
+      "handler": "createUser"
+    },
+    "get": {
+      "controller": "users",
+      "handler": "getAllUsers"
+    }
+  },
+  "/users/:id": {
+    "get": {
+      "controller": "users",
+      "handler": "getUserbyId"
+    },
+    "put": {
+      "controller": "users",
+      "handler": "updateUser"
+    },
+    "delete": {
+      "controller": "users",
+      "handler": "deleteUser"
+    }
+  }
+}
