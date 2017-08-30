@@ -19,6 +19,14 @@ app.use(cors())
 // Get all controllers using requireDir to load from ./controllers
 const controllers = requireDir('./controllers')
 
+// Log all requests
+app.use((req, res, next) => {
+  const now = Date.now()
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  console.log(`${now} - ${ip}, ${req.originalUrl}`)
+  next()
+})
+
 // Build API endpoints dynamically from routes
 // ---
 // Step 1. Iterate over all routes (root-level)
