@@ -8,6 +8,15 @@ const errors = {
     const validationError = new Error(JSON.stringify(err.collection))
     validationError.statusCode = 400
     throw validationError
+  },
+  /**
+   * For 409 Conflict errors
+   * @param {String} reason The conflict to resolve
+   */
+  conflict: (reason) => {
+    const conflictError = new Error(reason)
+    conflictError.statusCode = 409
+    throw conflictError
   }
 }
 

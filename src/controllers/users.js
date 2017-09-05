@@ -20,6 +20,16 @@ const users = {
   createUser: (req) => {
     return userModel.validate(req.body)
       .catch(errors.validation)
+      .then((data) => {
+        // Check if user with email address already exists
+        return userCollection.find({ email: data.email })
+          .then((found) => {
+            // If found, throw 409 Conflict error
+            if (found.length > 0) errors.conflict(`Email address ${data.email} already exists`)
+            // If doesn't throw - returns data to be inserted in DB
+            return data
+          })
+      })
       .then((data) => userCollection.insert(data))
   },
   /**
